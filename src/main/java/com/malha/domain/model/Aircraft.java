@@ -3,16 +3,16 @@ package com.malha.domain.model;
 import java.util.Objects;
 import java.util.UUID;
 
-public class AircraftType {
+public class Aircraft {
     private final String id;
     private String name;
 
-    public AircraftType(String name) {
+    public Aircraft(String name) {
         this.id = UUID.randomUUID().toString();
         setName(name);
     }
 
-    public AircraftType(String id, String name) {
+    public Aircraft(String id, String name) {
         this.id = id;
         setName(name);
     }
@@ -21,7 +21,8 @@ public class AircraftType {
 
     public String getName() { return name; }
     public void setName(String name) {
-        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException("Nome da aeronave não pode ser vazio.");
+        if (name == null || name.trim().isEmpty())
+            throw new IllegalArgumentException("Nome da aeronave não pode ser vazio.");
 
         String normalized = name.trim();
 
@@ -34,8 +35,8 @@ public class AircraftType {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AircraftType)) return false;
-        AircraftType that = (AircraftType) o;
+        if (!(o instanceof Aircraft)) return false;
+        Aircraft that = (Aircraft) o;
         return id.equals(that.id);
     }
 

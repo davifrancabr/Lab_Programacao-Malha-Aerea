@@ -8,8 +8,7 @@ import java.util.Optional;
 public interface AirportRepository {
     Airport save(Airport airport);
     Optional<Airport> findById(String id);
-    Optional<Airport> findByIcao(String icao);
-    Optional<Airport> findByIata(String iata);
+    Optional<Airport> findByCode(String code);
     List<Airport> findAll();
     void deleteById(String id);
 }

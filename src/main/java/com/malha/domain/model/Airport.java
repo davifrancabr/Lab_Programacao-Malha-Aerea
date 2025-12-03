@@ -5,50 +5,38 @@ import java.util.UUID;
 
 public class Airport {
     private final String id;
-    private IATACode iata;
-    private ICAOCode icao;
+    private String code;
     private String name;
     private String city;
     private String country;
 
-    public Airport(String name, String city, String country, String icao, String iata){
+    public Airport(String code, String name, String city, String country){
         this.id= UUID.randomUUID().toString();
+        setCode(code);
+        setName(name);
         setCity(city);
         setCountry(country);
-        setIcao(icao);
-        setIata(iata);
-        setName(name);
     }
 
-    public Airport(String id, String name, String city, String country, String icao, String iata){
+    public Airport(String id, String code, String name, String city, String country){
         this.id=id;
+        setCode(code);
+        setName(name);
         setCity(city);
         setCountry(country);
-        setIcao(icao);
-        setIata(iata);
-        setName(name);
     }
 
     public String getId(){
         return id;
     }
 
-    public String getIcao(){
-        return icao == null ? null : icao.getCode();
+    public String getCode(){
+        return code;
     }
 
-    public void setIcao(String icao){
-        if (icao == null || icao.trim().isEmpty()) this.icao = null;
-        else this.icao = new ICAOCode(icao);
-    }
-
-    public String getIata(){
-        return iata == null ? null : iata.getCode();
-    }
-
-    public void setIata(String iata){
-        if (iata == null || iata.trim().isEmpty()) this.iata = null;
-        else this.iata = new IATACode(iata);
+    public void setCode(String code){
+        if (code==null|| code.trim().isEmpty()) throw new IllegalArgumentException("Código IATA não pode ser nulo.");
+        this.code=code.trim().toUpperCase();
     }
 
     public String getName(){
@@ -91,6 +79,6 @@ public class Airport {
 
     @Override
     public String toString(){
-        return String.format("id: %d\nName: %s\nCity: %s\nCountry: %s\nICAO: %s\nIATA: %s", id,name,city,country,icao,iata);
+        return String.format("id: %s\nName: %s\nCity: %s\nCountry: %s\nIATA %s", id, name, city, country, code);
     }
 }

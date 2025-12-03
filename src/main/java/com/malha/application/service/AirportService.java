@@ -10,48 +10,47 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AirportService {
-    private final AirportRepository airportRepository;
+    private final AirportRepository repo;
 
-    public AirportService(AirportRepository airportRepository) {
-        this.airportRepository = airportRepository;
+    public AirportService(AirportRepository repo) {
+        this.repo = repo;
     }
 
-    public AirportDTO createAirport(String iata, String icao, String name, String city, String country) {
-        if (iata!=null && !iata.trim().isEmpty()) {
-            if (airportRepository.findByIata(iata).isPresent()) throw new DomainException("Código IATA já existe: " + iata);
-        }
-        Airport a = new Airport(iata, icao, name, city, country);
-        airportRepository.save(a);
+    public AirportDTO createAirport(String code, String name, String city, String country) {
+        Optional.ofNullable(code).ifPresent(c->{
+            if (repo.findByCode(c).isPresent()) throw new DomainException("Código IATA já existe: " + code);
+        });
+        Airport a = new Airport(code, name, city, country);
+        repo.save(a);
         return toDTO(a);
     }
 
-    public AirportDTO updateAirport(String id, String iata, String icao, String name, String city, String country) {
-        Airport existing = airportRepository.findById(id).orElseThrow(()-> new DomainException("Aeroporto não encontrado: " + id));
-        if (iata!=null && !iata.trim().isEmpty() && !iata.equalsIgnoreCase(existing.getIata())) {
-            if (airportRepository.findByIata(iata).isPresent()) throw new DomainException("Código IATA do aeroporto já existe: " + iata);
+    public AirportDTO updateAirport(String id, String code, String name, String city, String country) {
+        Airport existing = repo.findById(id).orElseThrow(()-> new DomainException("Aeroporto não encontrado: " + id));
+        if (!existing.getCode().equalsIgnoreCase(code)) {
+            if (repo.findByCode(code).isPresent()) throw new DomainException("Código IATA do aeroporto já existe: " + code);
         }
-        existing.setIata(iata);
-        existing.setIcao(icao);
+        existing.setCode(code);
         existing.setName(name);
         existing.setCity(city);
         existing.setCountry(country);
-        airportRepository.save(existing);
+        repo.save(existing);
         return toDTO(existing);
     }
     public AirportDTO getAirportById(String id) {
-        return airportRepository.findById(id).map(this::toDTO).orElse(null);
+        return repo.findById(id).map(this::toDTO).orElse(null);
     }
 
     public List<AirportDTO> listAllAirports() {
-        return airportRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        return repo.findAll().stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     public void deleteAirport(String id) {
-        if (airportRepository.findById(id).isEmpty()) throw new DomainException("Aeroporto não encontrado: " + id);
-        airportRepository.deleteById(id);
+        if (repo.findById(id).isEmpty()) throw new DomainException("Aeroporto não encontrado: " + id);
+        repo.deleteById(id);
     }
 
     private AirportDTO toDTO(Airport a) {
-        return new AirportDTO(a.getId(), a.getIata(), a.getIcao(), a.getName(), a.getCity(), a.getCountry());
+        return new AirportDTO(a.getId(), a.getCode(), a.getName(), a.getCity(), a.getCountry());
     }
 }

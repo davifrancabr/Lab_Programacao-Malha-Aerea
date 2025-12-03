@@ -1,14 +1,14 @@
 package com.malha.domain.repository;
 
-import com.malha.domain.model.AircraftType;
+import com.malha.domain.model.Aircraft;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AircraftRepository {
-    AircraftType save(AircraftType aircraft);
-    Optional<AircraftType> findById(String id);
-    List<AircraftType> findAll();
-    Optional<AircraftType> findByName(String name);
+    Aircraft save(Aircraft aircraft);
+    Optional<Aircraft> findById(String id);
+    List<Aircraft> findAll();
+    Optional<Aircraft> findByName(String name);
     void deleteById(String id);
 }

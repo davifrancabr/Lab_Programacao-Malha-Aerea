@@ -24,13 +24,11 @@ public class InMemoryAirportRepository implements AirportRepository {
     }
 
     @Override
-    public Optional<Airport> findByIcao(String icao) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Airport> findByIata(String iata) {
-        return Optional.empty();
+    public Optional<Airport> findByCode(String code) {
+        if (code==null) return Optional.empty();
+        return storage.values().stream()
+                .filter(a->a.getCode().equalsIgnoreCase(code))
+                .findFirst();
     }
 
     @Override

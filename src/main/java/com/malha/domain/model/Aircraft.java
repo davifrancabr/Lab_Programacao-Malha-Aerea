@@ -1,63 +1,50 @@
 package com.malha.domain.model;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class Aircraft {
-    private int id;
+    private final String id;
     private String name;
-    private String iata;
-    private String icao;
-    private String registration;
 
-    public Aircraft(int id, String name, String iata, String icao, String registration){
-        this.id=id;
-        this.name=name;
-        this.iata=iata;
-        this.icao=icao;
-        this.registration=registration;
+    public Aircraft(String name) {
+        this.id = UUID.randomUUID().toString();
+        setName(name);
     }
 
-    public int getId(){
-        return id;
+    public Aircraft(String id, String name) {
+        this.id = id;
+        setName(name);
     }
 
-    public void setId(int id){
-        this.id=id;
-    }
+    public String getId() { return id; }
 
-    public String getName(){
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty())
+            throw new IllegalArgumentException("Nome da aeronave não pode ser vazio.");
 
-    public void setName(String name){
-        this.name=name;
-    }
+        String normalized = name.trim();
 
-    public String getIata(){
-        return iata;
-    }
-
-    public void setIata(String iata){
-        this.iata=iata;
-    }
-
-    public String getIcao(){
-        return icao;
-    }
-
-    public void setIcao(String icao){
-        this.icao=icao;
-    }
-
-    public String getRegistration(){
-        return registration;
-    }
-
-    public void setRegistration(String registration){
-        this.registration=registration;
+        if (!normalized.matches("^[A-Za-z0-9 .\\-/]+$")) {
+            throw new IllegalArgumentException("Formatp inválido. caracteres permitidos: letras, numeros, espacos, ., -, /");
+        }
+        this.name = normalized;
     }
 
     @Override
-    public String toString(){
-        return String.format("Id: %d\nName: %s\nIATA: %s\nICAO: %s\nRegistration: %s",
-                id, name, iata, icao, registration);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Aircraft)) return false;
+        Aircraft that = (Aircraft) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(id); }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", id, name);
     }
 }

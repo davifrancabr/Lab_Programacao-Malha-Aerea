@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface AircraftRepository {
     Aircraft save(Aircraft aircraft);
-    Optional<Aircraft> findById(int id);
+    Optional<Aircraft> findById(String id);
     List<Aircraft> findAll();
-    void deleteById(int id);
+    Optional<Aircraft> findByName(String name);
+    void deleteById(String id);
 }

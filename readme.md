@@ -1,4 +1,3 @@
-[readme_malha_aerea.md](https://github.com/user-attachments/files/23916294/readme_malha_aerea.md)
 # Sistema de Gerenciamento de Malha Aérea
 
 Um sistema completo para gerenciamento de malha aérea desenvolvido em Java 21, seguindo os princípios do Domain-Driven Design (DDD) e oferecendo operações CRUD para aeroportos, rotas e tipos de aeronaves.

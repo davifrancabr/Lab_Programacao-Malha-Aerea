@@ -168,46 +168,7 @@ O sistema possui tratamento robusto de exceções através da classe `DomainExce
 
 Todas as exceções são capturadas no loop principal e exibidas de forma amigável ao usuário, permitindo que ele corrija o erro e tente novamente.
 
-## 🚧 Melhorias Futuras
 
-Este projeto foi desenvolvido como um sistema base e pode ser expandido com as seguintes funcionalidades:
 
-### Persistência de Dados
-- Implementar repositórios com banco de dados relacional (PostgreSQL, MySQL)
-- Adicionar JPA/Hibernate para mapeamento objeto-relacional
-- Criar migrations para versionamento do esquema do banco
-
-### API REST
-- Expor funcionalidades através de endpoints RESTful
-- Implementar autenticação e autorização
-- Adicionar documentação com Swagger/OpenAPI
-
-### Funcionalidades Avançadas
-- Algoritmo de busca do menor caminho entre aeroportos (Dijkstra)
-- Gerenciamento de voos programados com horários
-- Alocação de aeronaves específicas para rotas
-- Cálculo de capacidade de passageiros por aeronave
-- Relatórios de utilização da malha aérea
-
-### Qualidade de Código
-- Implementar testes unitários com JUnit 5
-- Adicionar testes de integração
-- Configurar CI/CD com GitHub Actions
-- Implementar análise estática de código com SonarQube
-
-### Interface
-- Desenvolver interface gráfica desktop com JavaFX
-- Criar interface web com Spring Boot + React
-- Adicionar visualização gráfica da malha aérea
-
-## 📄 Licença
-
-Este projeto foi desenvolvido para fins educacionais e está disponível para uso livre.
-
-## 👨‍💻 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias, correções de bugs ou novas funcionalidades.
-
----
 
 Desenvolvido com foco em arquitetura limpa e boas práticas de desenvolvimento Java.

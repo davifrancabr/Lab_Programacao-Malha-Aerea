@@ -8,6 +8,7 @@ public class RouteDTO {
     public int estimatedMinutes;
 
     public RouteDTO() {}
+
     public RouteDTO(String id, String originAirportId, String destinationAirportId, double distanceKm, int estimatedMinutes) {
         this.id = id;
         this.originAirportId = originAirportId;
